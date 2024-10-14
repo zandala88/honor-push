@@ -27,7 +27,7 @@ func (h *HonorPush) Send(message *Message) (*HonorSendResp, error) {
 	if err != nil {
 		return nil, err
 	}
-	request, err := post(SendHost+fmt.Sprintf(SendURL, h.AppId)).
+	request, err := post(sendHost+fmt.Sprintf(sendURL, h.AppId)).
 		header("Content-Type", "application/json").
 		header("Authorization", tokenInstance.AccessToken).
 		jsonBody(message)

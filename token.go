@@ -23,10 +23,10 @@ func init() {
 // GetToken 获取AccessToken值
 func GetToken(clientId, clientSecret string) (*HonorToken, error) {
 	nowMilliSecond := time.Now().UnixNano() / 1e6
-	if (nowMilliSecond-tokenInstance.CreateTime) < MaxTimeToLive*1000 && tokenInstance.AccessToken != "" {
+	if (nowMilliSecond-tokenInstance.CreateTime) < maxTimeToLive*1000 && tokenInstance.AccessToken != "" {
 		return tokenInstance, nil
 	}
-	request, err := post(AuthHost+AuthURL).
+	request, err := post(authHost+authURL).
 		header("Content-Type", "application/x-www-form-urlencoded").
 		jsonBody(honorTokenReq{
 			GrantType:    grantType,
