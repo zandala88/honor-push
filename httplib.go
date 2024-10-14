@@ -322,3 +322,14 @@ func (b *beegoHTTPRequest) Body(data interface{}) *beegoHTTPRequest {
 	}
 	return b
 }
+
+func (b *beegoHTTPRequest) param(value map[string]string) *beegoHTTPRequest {
+	for key, val := range value {
+		if param, ok := b.params[key]; ok {
+			b.params[key] = append(param, val)
+		} else {
+			b.params[key] = []string{val}
+		}
+	}
+	return b
+}

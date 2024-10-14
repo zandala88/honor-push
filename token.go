@@ -26,16 +26,12 @@ func GetToken(clientId, clientSecret string) (*HonorToken, error) {
 	if (nowMilliSecond-tokenInstance.CreateTime) < maxTimeToLive*1000 && tokenInstance.AccessToken != "" {
 		return tokenInstance, nil
 	}
-	request, err := post(authHost+authURL).
-		header("Content-Type", "application/x-www-form-urlencoded").
-		jsonBody(honorTokenReq{
-			GrantType:    grantType,
-			ClientId:     clientId,
-			ClientSecret: clientSecret,
-		})
-	if err != nil {
-		return nil, err
-	}
+	request := post(authHost+authURL).
+		header("Content-Type", "application/x-www-form-urlencoded").param(map[string]string{
+		"grant_type":    grantType,
+		"client_id":     clientId,
+		"client_secret": clientSecret,
+	})
 
 	resp := &HonorToken{}
 	if err := request.toJSON(&resp); err != nil {

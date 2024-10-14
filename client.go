@@ -1,6 +1,10 @@
 package honorpush
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+	"time"
+)
 
 type HonorPush struct {
 	AppId         int
@@ -30,6 +34,7 @@ func (h *HonorPush) Send(message *Message) (*HonorSendResp, error) {
 	request, err := post(sendHost+fmt.Sprintf(sendURL, h.AppId)).
 		header("Content-Type", "application/json").
 		header("Authorization", tokenInstance.AccessToken).
+		header("timestamp", strconv.FormatInt(time.Now().UnixNano()/1e6, 10)).
 		jsonBody(message)
 	if err != nil {
 		return nil, err
