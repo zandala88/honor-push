@@ -1,7 +1,7 @@
 package honorpush
 
 const (
-	grantType = "grant_type"
+	grantType = "client_credentials"
 )
 
 const (
