@@ -20,7 +20,7 @@ func main() {
 	}
 
 	clickAction := honorpush.NewClickAction(3)
-	androidNotification := honorpush.NewAndroidNotification("睿鹰急救天眼", "附近有呼叫请求").SetClickAction(clickAction)
+	androidNotification := honorpush.NewAndroidNotification("title", "msg").SetClickAction(clickAction)
 	android := honorpush.NewAndroidConfig().SetAndroidNotification(androidNotification)
 	message := honorpush.NewMessage().SetAndroidConfig(android).SetToken([]string{"your_token"})
 
